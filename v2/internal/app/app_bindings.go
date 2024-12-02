@@ -102,6 +102,10 @@ func generateBindings(bindings *binding.Bindings) error {
 
 	runtimeDir := filepath.Join(wailsjsbasedir, "runtime")
 	_ = os.RemoveAll(runtimeDir)
+	if err != nil {
+		return err
+	}
+	_ = fs.MkDirs(runtimeDir)
 	extractor := gosod.New(wrapper.RuntimeWrapper)
 	err = extractor.Extract(runtimeDir, nil)
 	if err != nil {
